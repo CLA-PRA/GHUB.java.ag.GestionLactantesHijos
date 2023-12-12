@@ -63,21 +63,17 @@ public class Mujer implements ComparableMujer,Comparable<Mujer>{
 	public List<Hijo> getHijos() {
 		return hijos;
 	}
+	//Escriba aquí el codigo faltante
 	public boolean esMenor(Object q) {
-		Mujer obj = (Mujer)q;
-		boolean valor =this.id.compareTo(obj.getId())<0?true:false;
-		
-		return valor;	
+			
 	}
+	//Escriba aquí el código faltante
 	public boolean esMayor(Object q) {
-        Mujer obj = (Mujer)q;	
-		boolean valor =this.id.compareTo(obj.getId())>0?true:false;
-		return valor;
+       
 	}
+	//Escriba aquí el código faltante
 	public boolean esIgual(Object q) {
-		Mujer obj = (Mujer)q;	
-		boolean valor =this.id.compareTo(obj.getId())==0?true:false;
-		return valor;
+		
 		
 	}
 		
@@ -90,10 +86,7 @@ public class Mujer implements ComparableMujer,Comparable<Mujer>{
 	
 	@Override
 	public int compareTo(Mujer o) {
-		int valor=this.id.compareTo(o.getId());
 		
-		
-		return valor;
 		
 	}
 	

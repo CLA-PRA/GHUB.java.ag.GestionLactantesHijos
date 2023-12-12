@@ -50,7 +50,7 @@ public class Lactario {
 		   //Agrega un registro mujer al árbol
 		   abo.insertar(new Mujer(id, nombre,edad,fecha,hijos));
 		   //Agrega un registro mujer a la Tabla Hash
-		   ht.put(id, new Mujer(id,nombre,edad,fecha,hijos));
+		   
 		   
 		   return true;
 		
@@ -296,9 +296,10 @@ public class Lactario {
 	 * @param iD
 	 * @return
 	 */
+	//Agrege el código para que regrese el id de Mujer
 	public Mujer buscar_mujer(String iD) {
 		
-		return ht.get(iD);
+		
 		
 	}
 	

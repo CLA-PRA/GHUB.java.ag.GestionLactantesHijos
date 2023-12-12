@@ -170,7 +170,8 @@ public class ArbolAVL  {
 		private void inorden(Nodo aux) {
 			if(aux !=null) {
 				inorden(aux.getIzquierdo());
-				lista.add(visitar(aux));
+				//Agrege la visita a la lista, con el método add
+				
 				inorden(aux.getDerecho());
 			}
 		}
@@ -193,7 +194,8 @@ public class ArbolAVL  {
 			if(aux !=null) {
 				postorden(aux.getIzquierdo());
 				postorden(aux.getDerecho());
-				lista.add(visitar(aux));
+				//Agrege la visita a la lista, con el método add
+				
 			}
 			
 			
