@@ -1,23 +1,37 @@
 package negocios;
+
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import datos.ArbolAVL;
 import datos.Mujer;
-import datos.BTreePrinter;
+
 import datos.Fecha;
+
+import datos.Hijo;
 
 
 public class Lactario {
 	ArbolAVL abo = new ArbolAVL();
 	TreeSet<Mujer> t = new TreeSet<Mujer>();
 	LinkedList<Object> lista;
+	//Colocar un objeto HashTable que guarde un String (ID de Mujer) y
+	// un objeto Mujer
+	Hashtable<String,Mujer> ht;
+	//Coloque aquí un objeto tipo ArrayList para que guarde los hijo de una mujer
+	List<Hijo> hijos;
+	
 	
 	
 	public Lactario() {
 		lista = new LinkedList<Object>();
-			
+		ht = new Hashtable<String,Mujer>();
+		hijos = new ArrayList<Hijo>();
+		
 	}
 	/**
 	 * 
@@ -25,14 +39,18 @@ public class Lactario {
 	 * @param nombre
 	 * @param edad
 	 * @param fecha
+	 * @param hijos
 	 * @return
 	 * @throws Exception
 	 */
 	public boolean agregar_elementos(String id, String nombre,
-			   int edad, Fecha fecha) throws Exception {
+			   int edad, Fecha fecha, List<Hijo> hijos) throws Exception {
 		try {
 		
-		   abo.insertar(new Mujer(id, nombre,edad,fecha));
+		   //Agrega un registro mujer al árbol
+		   abo.insertar(new Mujer(id, nombre,edad,fecha,hijos));
+		   //Agrega un registro mujer a la Tabla Hash
+		   ht.put(id, new Mujer(id,nombre,edad,fecha,hijos));
 		   
 		   return true;
 		
@@ -43,6 +61,49 @@ public class Lactario {
 		}
 		
 	}
+	public boolean agregar_hijos(String Id, String nombre, Fecha fecha) {
+		//Agrege aquí a la lista de hijos
+		hijos.add(new Hijo(Id,nombre,fecha));
+		return true;
+	}
+	
+	public List<Hijo> recorrer_hijos() {
+		return hijos;
+		
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param nombre
+	 * @param edad
+	 * @param fecha
+	 * @return
+	 * @throws Exception
+	 */
+	/*
+	 * Se elimina porque ahora se debe incluir un registro hijo, 
+	 * por cada mujer
+	public boolean agregar_elementos(String id, String nombre,
+			   int edad, Fecha fecha) throws Exception {
+		try {
+		
+		   abo.insertar(new Mujer(id, nombre,edad,fecha));
+		   ht.put(id, new Mujer(id,nombre,edad,fecha));
+		   
+		   
+		   return true;
+		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	*/
+	
+	
 	/**
 	 * 
 	 * @param id
@@ -82,6 +143,7 @@ public class Lactario {
 		try {
 		   //Agrege aquí el código para eliminar un elemento en el Objeto ArbolAVL
 		   abo.eliminar(new Mujer(id, nombre,edad,fecha));
+		   ht.remove(id);
 		 
 		   return true;
 		}
@@ -128,6 +190,8 @@ public class Lactario {
 		else return false;
 		
 	}
+	
+	
 	/**
 	 * 
 	 * @param id
@@ -149,33 +213,52 @@ public class Lactario {
 		
 		
 	}
-	public boolean recorrer_elementos() throws Exception{
+	
+	public LinkedList<Object> recorrer_elementosInOrden() throws Exception{
 		try {
-			System.out.print("\nPreOrden:");
-			abo.preorden();
-			System.out.print("\nInOrden:");
-			abo.inorden();
-			System.out.print("\nPostOrden:");
-			abo.postorden();
-			System.out.print("\nNiveles:");
 			
-			System.out.print("\nJerárquico:\n");
-			BTreePrinter.printNode(abo.getRaiz());
+			System.out.println("\nInOrden:\n");
+			lista = abo.inorden();
 			
-			return true;
+			for (Iterator<Object> it = lista.iterator(); it.hasNext() ;)
+			{
+				System.out.print(it.next()+" ");
+			}
+			System.out.println();
 			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			
 		}
+		return lista;
 		
 	}
-	public LinkedList<Object> recorrer_elementosUtilandoLinkedList() throws Exception{
+	public LinkedList<Object> recorrer_elementosPreOrden() throws Exception{
 		try {
 			
-			System.out.println("\nInOrden utilizando un LinkedList:");
-			lista = abo.inorden2();
+			System.out.println("\nPreOrden:\n");
+			lista = abo.preorden();
+			
+			for (Iterator<Object> it = lista.iterator(); it.hasNext() ;)
+			{
+				System.out.print(it.next()+" ");
+			}
+			System.out.println();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return lista;
+		
+	}
+	public LinkedList<Object> recorrer_elementosPostOrden() throws Exception{
+		try {
+			
+			System.out.println("\nPostOrden:\n");
+			lista = abo.postorden();
 			
 			for (Iterator<Object> it = lista.iterator(); it.hasNext() ;)
 			{
@@ -192,8 +275,8 @@ public class Lactario {
 		
 	}
 	
-	public boolean recorrer_elementosTreeSet() throws Exception{
-		try {
+	public TreeSet<Mujer> recorrer_elementosTreeSet() {
+		
 			//coloque el código necesario para recorrer la colección t
 			//utilizando el Iterador Mujer, 
 			
@@ -201,14 +284,24 @@ public class Lactario {
 			{
 				System.out.println(it.next());
 			}
-			return true;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			return t;
 		}
 		
+		
+	
+	/**
+	 * Busca un ID de Mujer en un Tabla Hash
+	 *   retorna un objeto Mujer si la encuentra y
+	 *   null si no la encuentra
+	 * @param iD
+	 * @return
+	 */
+	public Mujer buscar_mujer(String iD) {
+		
+		return ht.get(iD);
+		
 	}
+	
 		
 	
 }

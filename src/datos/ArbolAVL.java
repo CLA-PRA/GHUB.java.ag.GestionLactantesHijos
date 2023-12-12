@@ -1,5 +1,4 @@
 package datos;
-
 import java.util.LinkedList;
 
 /**
@@ -133,8 +132,11 @@ public class ArbolAVL  {
 		/**
 		 * Invoca al método recursivo
 		 */
-		public void preorden() {
+		public LinkedList<Object> preorden() {
+			lista = new LinkedList<Object>();
 			preorden(raiz);
+			return lista;
+			
 		}
 		/**
 		 * 
@@ -142,21 +144,24 @@ public class ArbolAVL  {
 		 */
 		private void preorden(Nodo aux) {
 			if(aux !=null) {
-				visitar(aux);
+				lista.add(visitar(aux));
 				preorden(aux.getIzquierdo());
 				preorden(aux.getDerecho());
 			}
 		}
-		private void visitar(Nodo aux) {
-			System.out.print(aux.getValor()+" ");
+		private Object visitar(Nodo aux) {
+			
+			return aux.getValor();
 		}
 		
 		
 		/**
 		 * Invoca al método recursivo
 		 */
-		public void inorden() {
+		public LinkedList<Object> inorden() {
+			lista = new LinkedList<Object>();
 			inorden(raiz);
+			return lista;
 		}
 		/**
 		 * 
@@ -165,49 +170,19 @@ public class ArbolAVL  {
 		private void inorden(Nodo aux) {
 			if(aux !=null) {
 				inorden(aux.getIzquierdo());
-				visitar(aux);
+				lista.add(visitar(aux));
 				inorden(aux.getDerecho());
 			}
 		}
 		
-		
-		/**
-		 * Invoca a versión 2 de inorder
-		 */
-		public LinkedList<Object> inorden2() {
-			lista = new LinkedList<Object>();
-			inorden2(raiz);
-			return lista;
-		}
-		
-		/**
-		 * versión 2 de inorden
-		 */
-		private void inorden2(Nodo aux) {
 			
-			if(aux !=null) {
-				inorden2(aux.getIzquierdo());
-				//Coloque aquí el código para que inserte en la LinkedList
-				// el Resultado del método visitar2(aux);
-				lista.add(visitar2(aux));
-				inorden2(aux.getDerecho());
-			}
-		}
-		
-		/**
-		 * versión 2 de visitar
-		 * @param aux
-		 */
-		private Object visitar2(Nodo aux) {
-			
-			return aux.getValor();
-		}
-		
 		/**
 		 * Invoca al método recursivo
 		 */
-		public void postorden() {
+		public LinkedList<Object> postorden() {
+			lista = new LinkedList<Object>();
 			postorden(raiz);
+			return lista;
 		}
 		/**
 		 * 
@@ -218,7 +193,7 @@ public class ArbolAVL  {
 			if(aux !=null) {
 				postorden(aux.getIzquierdo());
 				postorden(aux.getDerecho());
-				visitar(aux);
+				lista.add(visitar(aux));
 			}
 			
 			

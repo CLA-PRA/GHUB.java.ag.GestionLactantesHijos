@@ -1,5 +1,8 @@
 package datos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //Coloque aquí el código para que implemente este clase
 //con las interfases ComparableMujer y Comparable
 public class Mujer implements ComparableMujer,Comparable<Mujer>{
@@ -9,12 +12,27 @@ public class Mujer implements ComparableMujer,Comparable<Mujer>{
 	private String nombre;
 	private int edad;
 	private Fecha fechaNacimiento;
+	private List<Hijo> hijos;
 	
+	
+	public void setHijos(List<Hijo> hijos) {
+		this.hijos = hijos;
+	}
 	public Mujer(String id, String nombre, int edad, Fecha fechaNacimiento) {
 		this.id = id;
 		this.nombre = nombre;
 		this.edad = edad;
 		this.fechaNacimiento=fechaNacimiento;
+	
+		
+	}
+	public Mujer(String id, String nombre, int edad, Fecha fechaNacimiento, List<Hijo> hijos) {
+		this.id = id;
+		this.nombre = nombre;
+		this.edad = edad;
+		this.fechaNacimiento=fechaNacimiento;
+		this.hijos=hijos;
+		
 	}
 	public String getNombre() {
 		return nombre;
@@ -42,19 +60,23 @@ public class Mujer implements ComparableMujer,Comparable<Mujer>{
 	public void setFechaNacimiento(Fecha fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	public List<Hijo> getHijos() {
+		return hijos;
+	}
 	public boolean esMenor(Object q) {
 		Mujer obj = (Mujer)q;
-		boolean valor =this.nombre.compareTo(obj.getNombre())<0?true:false;
+		boolean valor =this.id.compareTo(obj.getId())<0?true:false;
+		
 		return valor;	
 	}
 	public boolean esMayor(Object q) {
         Mujer obj = (Mujer)q;	
-		boolean valor =this.nombre.compareTo(obj.getNombre())>0?true:false;
+		boolean valor =this.id.compareTo(obj.getId())>0?true:false;
 		return valor;
 	}
 	public boolean esIgual(Object q) {
 		Mujer obj = (Mujer)q;	
-		boolean valor =this.nombre.compareTo(obj.getNombre())==0?true:false;
+		boolean valor =this.id.compareTo(obj.getId())==0?true:false;
 		return valor;
 		
 	}
@@ -63,14 +85,16 @@ public class Mujer implements ComparableMujer,Comparable<Mujer>{
 	@Override
 	public String toString() {
 		//return  "Id:"+id + "," + nombre +","+edad+" anios,"+"Fecha:"+fechaNacimiento ;
-	    return nombre;
+	    return id;
 	}
-	//Sobreescriba el método necesario para que ordene los Nodos
-	//  en base al atributo Nombre
+	
 	@Override
 	public int compareTo(Mujer o) {
-		int valor=this.nombre.compareTo(o.getNombre());
+		int valor=this.id.compareTo(o.getId());
+		
+		
 		return valor;
+		
 	}
 	
 	

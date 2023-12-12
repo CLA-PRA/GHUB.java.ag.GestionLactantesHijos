@@ -14,16 +14,17 @@ public class Menu {
 		int opcion=0;
 		while (opcion!=99) {
 			do {
-				System.out.println("\t********* MENU PRINCIPAL **********");
-				System.out.println("\t*  1. Agregar AVL/TreeSet         *");
-				System.out.println("\t*  2. Eliminar AVL/TreeSet        *");
-				System.out.println("\t*  3. Buscar AVL                  *");
-				System.out.println("\t*  4. Mostrar AVL                 *");	
-				System.out.println("\t*  5. Buscar TreeSet              *");
-				System.out.println("\t*  6. Mostrar TreeSet             *");	
-				System.out.println("\t*                                 *");
-				System.out.println("\t* 99. Salir                       *");
-				System.out.println("\t***********************************");
+				System.out.println("\t************* MENU PRINCIPAL ****************");
+				System.out.println("\t*  1. Agregar AVL/TreeSet/HastTable         *");
+				System.out.println("\t*  2. Eliminar AVL/TreeSet/HashTable        *");
+				System.out.println("\t*  3. Buscar AVL                            *");
+				System.out.println("\t*  4. Mostrar AVL                           *");	
+				System.out.println("\t*  5. Buscar TreeSet                        *");
+				System.out.println("\t*  6. Mostrar TreeSet                       *");	
+				System.out.println("\t*  7. Buscar Elemento por ID                *");	
+				System.out.println("\t*                                           *");
+				System.out.println("\t* 99. Salir                                 *");
+				System.out.println("\t*********************************************");
 				System.out.print("Seleccione opción ->");
 				opcion = entrada.nextInt();
 				switch  (opcion) {
@@ -45,6 +46,9 @@ public class Menu {
 				case 6:
 					iOpc.recorrer_elementosTreeSet();
 					break;
+				case 7:
+					iOpc.buscar_elemento_id();
+					break;
 				
 				case 99:
 					salir();
@@ -53,7 +57,7 @@ public class Menu {
 					System.out.println("Opcion inválida");
 						
 				}
-			}while (opcion<0 || opcion>6 && opcion != 99);
+			}while (opcion<0 || opcion>7 && opcion != 99);
 		}
 	}
 	private static void salir() {
